@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Task List</h1>
+
+<!-- Search form -->
+<form method="get">
+    <div class="row">
+        <div class="col">
+            <select name="status" class="form-control">
+                <option value="">All statuses</option>
+                <option value="pending">Por realizar</option>
+                <option value="in_progress">En tránsito</option>
+                <option value="completed">Completada</option>
+            </select>
+        </div>
+        <div class="col">
+            <input type="date" name="date" class="form-control">
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+<a href="{% url 'task_create' %}" class="btn btn-success mt-3 mb-3">Create New Task</a>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Created At</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for task in tasks %}
+    <tr>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.created_at }}</td>
+        <td>{{ task.get_status_display }}</td>
+        <td>
+            <a href="{% url 'task_edit' task.pk %}" class="btn btn-sm btn-info">Edit</a>
+            <a href="{% url 'task_delete' task.pk %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">No tasks found.</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
