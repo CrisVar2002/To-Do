@@ -1,38 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Task List</h1>
+<div class="text-center">
+    <h1 style="font-family: 'Amatic SC', cursive; font-size: 3rem; font-weight: bold;">Lista de tareas</h1>
+</div>
 
-<!-- Search form -->
-<form method="get">
-    <div class="row">
-        <div class="col">
+<div class="text-center mb-4" style="font-family: 'Amatic SC', cursive; font-size: 1.5rem;">
+    Filtrar estados por:
+</div>
+
+<form method="get" class="mb-4">
+    <div class="row justify-content-center">
+        <div class="col-md-3">
             <select name="status" class="form-control">
-                <option value="">All statuses</option>
+                <option value="">Todos</option>
                 <option value="pending">Por realizar</option>
                 <option value="in_progress">En tránsito</option>
                 <option value="completed">Completada</option>
             </select>
         </div>
-        <div class="col">
+        <div class="col-md-3">
             <input type="date" name="date" class="form-control">
         </div>
-        <div class="col">
-            <button type="submit" class="btn btn-primary">Search</button>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary" style="background-color: #19323C; border-color: #19323C;">Buscar</button>
         </div>
     </div>
 </form>
 
-<a href="{% url 'task_create' %}" class="btn btn-success mt-3 mb-3">Create New Task</a>
+<div class="text-center mb-3">
+    <a href="{% url 'create_task' %}" class="btn btn-primary btn-lg" style="background-color: #19323C; border-color: #19323C; width: 400px; transition: transform 0.2s;">Crear Nueva Tarea</a>
+</div>
 
 <table class="table">
     <thead>
     <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Created At</th>
-        <th>Status</th>
-        <th>Actions</th>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Creado en</th>
+        <th>Estado</th>
+        <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -40,18 +47,24 @@
     <tr>
         <td>{{ task.title }}</td>
         <td>{{ task.description }}</td>
-        <td>{{ task.created_at }}</td>
+        <td>{{ task.created_at|date:"d M Y" }}</td>
         <td>{{ task.get_status_display }}</td>
         <td>
-            <a href="{% url 'task_edit' task.pk %}" class="btn btn-sm btn-info">Edit</a>
-            <a href="{% url 'task_delete' task.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            <a href="{% url 'task_edit' task.pk %}" class="btn btn-sm btn-info">Editar</a>
+            <a href="{% url 'task_delete' task.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
         </td>
     </tr>
     {% empty %}
     <tr>
-        <td colspan="5">No tasks found.</td>
+        <td colspan="5">No se encontraron tareas.</td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
+
+<style>
+    .btn-primary:active {
+        transform: scale(0.95);
+    }
+</style>
 {% endblock %}

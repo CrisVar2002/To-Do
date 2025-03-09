@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.task_list, name='task_list'),
-    path('new/', views.task_create, name='task_create'),
+    path('create/', views.task_create, name='create_task'),
     path('edit/<int:pk>/', views.task_edit, name='task_edit'),
     path('delete/<int:pk>/', views.task_delete, name='task_delete'),
 ]

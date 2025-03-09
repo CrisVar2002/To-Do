@@ -3,22 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager</title>
+    <title>Administrador de Tareas</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Inter:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f8ff;
+            color: #333;
+            font-family: 'Inter', sans-serif;
+        }
+        .navbar {
+            background-color: #19323C;
+        }
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff !important;
+            font-family: 'Amatic SC', cursive;
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        .container {
+            max-width: 800px;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        .btn-secondary {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        .btn-secondary:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+        .btn-danger {
+            background-color: #A93F55;
+            border-color: #A93F55;
+        }
+        .btn-danger:hover {
+            background-color: #922C44;
+            border-color: #922C44;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Task Manager</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'task_list' %}">Tasks</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="content">
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand mx-auto" href="#">Administrador de Tareas</a>
+</nav>
+<div class="content">
+    <div class="container">
         {% block content %}
         {% endblock %}
     </div>
